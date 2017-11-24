@@ -13,15 +13,15 @@ public:
     AD5293();
     uint8_t AD5293_CS_PIN;
     uint8_t NUM_AD5293;
-    word AD5293_MAX_POSITION;
-    word AD5293_MIN_POSITION;
+    uint16_t AD5293_MAX_POSITION;
+    uint16_t AD5293_MIN_POSITION;
 
-    void begin(uint8_t num_devices, uint8_t cs_pin, word min_position=0, word max_position=1023);
-    void setWiperPosition(uint8_t device_num, word position);
+    void begin(uint8_t num_devices, uint8_t cs_pin, uint16_t min_position=0, uint16_t max_position=1023);
+    void setWiperPosition(uint8_t device_num, uint16_t position);
     void configure(uint8_t device_num, uint8_t mode, uint8_t write_protect);
 
 private:
-    void writeToDeviceNumber(uint8_t device_num, word command);
+    void writeToDeviceNumber(uint8_t device_num, uint16_t command);
 
 };
 #endif
