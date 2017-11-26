@@ -47,9 +47,13 @@ void AD5293::writeToDeviceNumber(uint8_t device_num, uint16_t command) {
     uint16_t ret=0;
     digitalWrite(AD5293_CS_PIN, LOW);
     SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE1));
-    ret = SPI.transfer16(command);
-    for (int i=0; i<device_num; i++) {
-      ret = SPI.transfer16(CMD_NOP);
+    for (int i=NUM_AD5293-1; i>=0; i--) {
+      if (i == device_num){
+        ret = SPI.transfer16(command);
+      }
+      else{
+        ret = SPI.transfer16(CMD_NOP);
+      }
     }
     SPI.endTransaction();
     digitalWrite(AD5293_CS_PIN, HIGH);
